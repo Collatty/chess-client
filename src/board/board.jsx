@@ -29,10 +29,10 @@ const initialPositions = () => {
   tiles = tiles.map(() => null);
   tiles[0] = <BlackRook />;
   tiles[7] = <BlackRook />;
-  tiles[1] = <BlackBishop />;
-  tiles[6] = <BlackBishop></BlackBishop>;
-  tiles[2] = <BlackKnight></BlackKnight>;
-  tiles[5] = <BlackKnight></BlackKnight>;
+  tiles[2] = <BlackBishop />;
+  tiles[5] = <BlackBishop></BlackBishop>;
+  tiles[1] = <BlackKnight></BlackKnight>;
+  tiles[6] = <BlackKnight></BlackKnight>;
   tiles[3] = <BlackQueen></BlackQueen>;
   tiles[4] = <BlackKing></BlackKing>;
   for (let i = 8; i < 16; i++) {
