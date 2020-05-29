@@ -1,12 +1,14 @@
 import React from 'react';
+import draggablePieceHoc from './draggablePieceHoc';
 
-const BlackRook = () => {
+const BlackRook = (props) => {
   return (
     <svg
       xmlns="http://www.w3.org/2000/svg"
       viewBox="0 0 45 45"
       width="100%"
       height="100%"
+      id={props.id}
     >
       <g
         fill={0}
@@ -41,4 +43,4 @@ const BlackRook = () => {
   );
 };
 
-export default BlackRook;
+export default draggablePieceHoc(BlackRook);

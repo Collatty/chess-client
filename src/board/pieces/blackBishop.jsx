@@ -1,4 +1,5 @@
 import React from 'react';
+import draggablePieceHoc from './draggablePieceHoc';
 
 const BlackBishop = () => {
   return (
@@ -31,4 +32,4 @@ const BlackBishop = () => {
   );
 };
 
-export default BlackBishop;
+export default draggablePieceHoc(BlackBishop);

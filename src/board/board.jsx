@@ -15,42 +15,65 @@ import WhiteKing from './pieces/whiteKing';
 import WhiteQueen from './pieces/whiteQueen';
 
 class Board extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { tiles: this.initialPositions() };
+  }
+  handleDragStart(event, drag) {
+    console.log('Drag start');
+    console.log(drag.node);
+  }
+
+  handleDragStop(event, drag) {
+    console.log('drag stop');
+  }
+
+  handleDrag(event, drag) {
+    console.log("I'm dragging");
+  }
+
+  initialPositions = () => {
+    let tiles = [...Array.from(64).keys()];
+    tiles = tiles.map(() => null);
+    tiles[0] = (
+      <BlackRook
+        onStart={this.handleDragStart}
+        onDrag={this.handleDrag}
+        onStop={this.handleDragStop}
+      ></BlackRook>
+    );
+    tiles[7] = <BlackRook />;
+    tiles[2] = <BlackBishop />;
+    tiles[5] = <BlackBishop></BlackBishop>;
+    tiles[1] = <BlackKnight></BlackKnight>;
+    tiles[6] = <BlackKnight></BlackKnight>;
+    tiles[3] = <BlackQueen></BlackQueen>;
+    tiles[4] = <BlackKing></BlackKing>;
+    for (let i = 8; i < 16; i++) {
+      tiles[i] = <BlackPawn></BlackPawn>;
+    }
+    for (let i = 48; i < 56; i++) {
+      tiles[i] = <WhitePawn></WhitePawn>;
+    }
+    tiles[56] = <WhiteRook></WhiteRook>;
+    tiles[63] = <WhiteRook></WhiteRook>;
+    tiles[57] = <WhiteKnight></WhiteKnight>;
+    tiles[62] = <WhiteKnight></WhiteKnight>;
+    tiles[58] = <WhiteBishop></WhiteBishop>;
+    tiles[61] = <WhiteBishop></WhiteBishop>;
+    tiles[60] = <WhiteKing></WhiteKing>;
+    tiles[59] = <WhiteQueen></WhiteQueen>;
+
+    return tiles;
+  };
+
   render() {
     return (
       <div className="board">
-        <TileList positions={initialPositions()}></TileList>
+        <TileList positions={this.state.tiles}></TileList>
       </div>
     );
   }
 }
-
-const initialPositions = () => {
-  let tiles = [...Array.from(64).keys()];
-  tiles = tiles.map(() => null);
-  tiles[0] = <BlackRook />;
-  tiles[7] = <BlackRook />;
-  tiles[2] = <BlackBishop />;
-  tiles[5] = <BlackBishop></BlackBishop>;
-  tiles[1] = <BlackKnight></BlackKnight>;
-  tiles[6] = <BlackKnight></BlackKnight>;
-  tiles[3] = <BlackQueen></BlackQueen>;
-  tiles[4] = <BlackKing></BlackKing>;
-  for (let i = 8; i < 16; i++) {
-    tiles[i] = <BlackPawn></BlackPawn>;
-  }
-  for (let i = 48; i < 56; i++) {
-    tiles[i] = <WhitePawn></WhitePawn>;
-  }
-  tiles[56] = <WhiteRook></WhiteRook>;
-  tiles[63] = <WhiteRook></WhiteRook>;
-  tiles[57] = <WhiteKnight></WhiteKnight>;
-  tiles[62] = <WhiteKnight></WhiteKnight>;
-  tiles[58] = <WhiteBishop></WhiteBishop>;
-  tiles[61] = <WhiteBishop></WhiteBishop>;
-  tiles[60] = <WhiteKing></WhiteKing>;
-  tiles[59] = <WhiteQueen></WhiteQueen>;
-
-  return tiles;
-};
 
 export default Board;
