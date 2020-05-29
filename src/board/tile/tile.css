@@ -1,0 +1,15 @@
+.PlayerOne {
+  background-color: white;
+  float: left;
+  width: 70px;
+  height: 70px;
+  display: table-cell;
+}
+
+.PlayerTwo {
+  float: left;
+  background-color: #d0a21b;
+  width: 70px;
+  height: 70px;
+  display: table-cell;
+}
