@@ -20,29 +20,55 @@ class Board extends React.Component {
     this.state = { tiles: this.initialPositions() };
   }
   handleDragStart(event, drag) {
-    console.log('Drag start');
-    console.log(drag.node);
+    console.log(drag);
+
+    const startTile = this.calculateTile(drag);
+    console.log(startTile);
+
+    this.setState({ startTile: startTile });
+  }
+
+  calculateTile(drag) {
+    const x = drag.node.offsetLeft + drag.x;
+    const y = drag.node.offsetTop + drag.y;
+    return 8 * Math.floor(y / 70) + Math.floor(x / 70);
   }
 
   handleDragStop(event, drag) {
-    console.log('drag stop');
+    const targetTile = this.calculateTile(drag);
+    const tiles = this.state.tiles.slice();
+    const piece = tiles[this.state.startTile];
+    tiles[this.state.startTile] = null;
+    tiles[targetTile] = piece;
+    this.setState({ tiles: tiles, startTile: null, targetTile: null });
   }
 
-  handleDrag(event, drag) {
-    console.log("I'm dragging");
-  }
+  handleDrag(event, drag) {}
+
+  updateTile = (tileNumber) => {
+    this.props.tile = tileNumber;
+  };
 
   initialPositions = () => {
+    console.log(this);
     let tiles = [...Array.from(64).keys()];
     tiles = tiles.map(() => null);
     tiles[0] = (
       <BlackRook
+        onStart={this.handleDragStart.bind(this)}
+        onDrag={this.handleDrag.bind(this)}
+        onStop={this.handleDragStop.bind(this)}
+      ></BlackRook>
+    );
+    tiles[7] = (
+      <BlackRook
+        tile={7}
+        updateTile={this.updateTile}
         onStart={this.handleDragStart}
         onDrag={this.handleDrag}
         onStop={this.handleDragStop}
-      ></BlackRook>
+      />
     );
-    tiles[7] = <BlackRook />;
     tiles[2] = <BlackBishop />;
     tiles[5] = <BlackBishop></BlackBishop>;
     tiles[1] = <BlackKnight></BlackKnight>;
